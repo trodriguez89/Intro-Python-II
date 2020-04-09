@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,14 +39,47 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-
+player = Player(input("Please enter your name: "), room["outside"])
 # Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+
+while True:
+    # * Prints the current room name
+    print(f"You are currently in {player.current_room.name}")
+    # * Prints the current description (the textwrap module might be useful here).
+    print(f"{player.current_room.description}")
+    # * Waits for user input and decides what to do.
+    user = input("Where would you like to go? [n]orth [e]ast [s]outh [w]est [q]uit \n").lower()
+    # If the user enters "q", quit the game.
+    if user == "q":
+        print("Thanks for playing!")
+        exit()
+    
+    # If the user enters a cardinal direction, attempt to move to the room there.
+    elif user == "n":
+        if player.current_room.n_to != None:
+            player.current_room = player.current_room.n_to
+        # Print an error message if the movement isn't allowed.
+        else:
+            print("Sorry can't go in that direction!")
+        
+    elif user == "e":
+        if player.current_room.e_to != None:
+            player.current_room = player.current_room.e_to
+
+        else:
+            print("Sorry can't go in that direction!")
+
+    elif user == "s":
+        if player.current_room.s_to != None:
+            player.current_room = player.current_room.s_to
+
+        else:
+            print("Sorry can't go in that direction!")
+
+    elif user == "w":
+        if player.current_room.w_to != None:
+            player.current_room = player.current_room.w_to
+
+        else:
+            print("Sorry can't go in that direction!")
+
